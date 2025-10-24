@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BE MY VALENTINE♥</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      padding: 25px;
+      background-color: #ffc0cb;
+      color: #ffffff;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      /* Remove min-height and use height: 100% for scrollable content */
+      height: 100vh;
+    }
+
+    .title {
+      color: #ffffff;
+      font-family: "Playfair Display", serif;
+      text-align: center;
+    }
+    
+    .image-container {
+      text-align: center;
+      margin: 20px 0;
+    }
+    
+    .wedding-image {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    .buttons-container {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      margin-top: 30px;
+      padding: 0 25px;
+    }
+    
+    .btn {
+      padding: 12px 24px;
+      font-size: 18px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: bold;
+      background-color: #333333;
+      color: #ffffff;
+    }
+    
+    .yes-btn {
+      background-color: #ff6b6b;
+      color: white;
+    }
+    
+    .no-btn {
+      background-color: #4ecdc4;
+      color: white;
+    }
+    
+    .btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .section {
+      display: none;
+      text-align: center;
+      padding: 20px;
+      margin-top: 20px;
+    }
+    
+    .active {
+      display: block;
+    }
+    
+    .back-btn {
+      margin-top: 20px;
+      background-color: #5C6AC4;
+      color: white;
+    }
+    
+    .floating-emoji {
+      position: absolute;
+      font-size: 24px;
+      animation: float 15s infinite linear;
+      z-index: -1;
+    }
+    
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+    
+    /* Add overflow-y: auto to body to enable scrolling */
+    body {
+      overflow-y: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="title">BE MY VALENTINE♥</h1>
+    <div class="image-container">
+      <img src="https://uploads.onecompiler.io/437vq7ujm/442jzbdb2/download%20(8).jpg" alt="Valentine Photo" class="wedding-image">
+    </div>
+    <div class="buttons-container">
+      <button class="btn yes-btn" onclick="showSection('yes-section')">YES</button>
+      <button class="btn no-btn" onclick="showSection('no-section')">NO</button>
+    </div>
+  </div>
+  
+  <div id="yes-section" class="section">
+    <h2 class="title">YAY! I KNEW YOU'D SAY YES! ❤️</h2>
+    <p>Thank you for being my Valentine! I'm so happy you chose to be with me.</p>
+    <img src="https://uploads.onecompiler.io/437vq7ujm/442jzbdb2/5bdb0e92-e0a9-47af-a8c2-62ea8df8f5e9.jpg" alt="Happy Valentine" style="max-width: 300px; border-radius: 10px; margin-top: 20px;">
+    <br>
+    <button class="btn back-btn" onclick="showMainPage()">BACK</button>
+  </div>
+  
+  <div id="no-section" class="section">
+    <h2 class="title">OH NO! BUT I LOVE YOU ANYWAY! ❤️</h2>
+    <p>Even if you said no, I still want to be your Valentine. You're amazing!</p>
+    <img src="https://uploads.onecompiler.io/437vq7ujm/442jzbdb2/ff8e42cb-1315-4463-a826-4f77d7b95be9.jpg" alt="Sweet Valentine" style="max-width: 300px; border-radius: 10px; margin-top: 20px;">
+    <br>
+    <button class="btn back-btn" onclick="showMainPage()">BACK</button>
+  </div>
+
+  <script>
+    // Create floating emojis
+    function createFloatingEmojis() {
+      const emojis = ['❤️', '💕', '💖', '💗', '💓', '💞', '💘', '💝'];
+      const container = document.body;
+      
+      for (let i = 0; i < 20; i++) {
+        const emoji = document.createElement('div');
+        emoji.className = 'floating-emoji';
+        emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        
+        // Random position
+        emoji.style.left = Math.random() * 100 + 'vw';
+        emoji.style.animationDuration = (Math.random() * 10 + 10) + 's';
+        emoji.style.animationDelay = Math.random() * 5 + 's';
+        emoji.style.fontSize = (Math.random() * 20 + 15) + 'px';
+        
+        container.appendChild(emoji);
+      }
+    }
+    
+    // Call the function when page loads
+    window.onload = createFloatingEmojis;
+    
+    function showSection(sectionId) {
+      // Hide all sections
+      document.querySelectorAll('.section').forEach(section => {
+        section.classList.remove('active');
+      });
+      
+      // Show the selected section
+      document.getElementById(sectionId).classList.add('active');
+      
+      // Hide the main content (buttons and title)
+      document.querySelector('.container').style.display = 'none';
+    }
+    
+    function showMainPage() {
+      // Hide all sections
+      document.querySelectorAll('.section').forEach(section => {
+        section.classList.remove('active');
+      });
+      
+      // Show the main content (buttons and title)
+      document.querySelector('.container').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
